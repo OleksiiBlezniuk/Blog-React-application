@@ -1,4 +1,4 @@
-# Project Title
+# Blog React Application
 
 This is Blog React Application. This application is displaying posts from server and allows you to interact with them.
 - [DEMO LINK](https://oleksiiblezniuk.github.io/blog-react-application/)
