@@ -25,5 +25,5 @@ Technologies stack: HTML, JavaScript, React.js, SASS, BootStrap, ESlint, Proptyp
 
 ## Troubleshooting
 
-For any contributing or problem solving you could find me [here](oleksii.blezniuk@gmail.com) and [here](https://www.linkedin.com/in/oleksiiblezniuk/)  
+For any contributing or problem solving you could find me [here](https://www.linkedin.com/in/oleksiiblezniuk/)  
 
