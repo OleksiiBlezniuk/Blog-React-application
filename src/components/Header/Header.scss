@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    margin: 32px 0;
+  }
+
+  &__content {
+    height: 262px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.new-post-form {
+  display: flex;
+  flex-direction: row;
+}

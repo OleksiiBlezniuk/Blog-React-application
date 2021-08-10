@@ -1,41 +1,52 @@
-import React from 'react';
-import './App.scss';
-import './styles/general.scss';
+import React, { useEffect, useState } from 'react';
+
 import { PostsList } from './components/PostsList';
-import { PostDetails } from './components/PostDetails';
+import { getPostsFromServer } from './api/posts';
+import { Loader } from './components/Loader';
+import { Header } from './components/Header';
 
-const App = () => (
-  <div className="App">
-    <header className="App__header">
-      <label>
-        Select a user: &nbsp;
+import './App.scss';
 
-        <select className="App__user-selector">
-          <option value="0">All users</option>
-          <option value="1">Leanne Graham</option>
-          <option value="2">Ervin Howell</option>
-          <option value="3">Clementine Bauch</option>
-          <option value="4">Patricia Lebsack</option>
-          <option value="5">Chelsey Dietrich</option>
-          <option value="6">Mrs. Dennis Schulist</option>
-          <option value="7">Kurtis Weissnat</option>
-          <option value="8">Nicholas Runolfsdottir V</option>
-          <option value="9">Glenna Reichert</option>
-          <option value="10">Leanne Graham</option>
-        </select>
-      </label>
-    </header>
+export function App() {
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-    <main className="App__main">
-      <div className="App__sidebar">
-        <PostsList />
-      </div>
+  useEffect(() => {
+    getPosts();
+  }, []);
 
-      <div className="App__content">
-        <PostDetails />
-      </div>
-    </main>
-  </div>
-);
+  const getPosts = () => {
+    setIsLoading(true);
 
-export default App;
+    getPostsFromServer()
+      .then(setPosts)
+      .then(() => {
+        setIsLoading(false);
+        setIsError(false);
+      })
+      .catch(() => {
+        setIsError(true);
+        setIsLoading(false);
+      });
+  };
+
+  return (
+    <div className="App">
+      <Header getPosts={getPosts} />
+
+      <main className="App__main">
+        {isError && (
+          <h2 className="error-title">
+            An error occurred while loading data
+          </h2>
+        )}
+        {isLoading ? (
+          <Loader />
+        ) : isError || (
+          <PostsList posts={posts} getPosts={getPosts} />
+        )}
+      </main>
+    </div>
+  );
+}

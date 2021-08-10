@@ -1,37 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { Post } from '../Post/Post';
+
 import './PostsList.scss';
 
-export const PostsList = () => (
+export const PostsList = ({ posts, getPosts }) => (
   <div className="PostsList">
-    <h2>Posts:</h2>
+    <h2 className="PostList__title">
+      Posts:
+    </h2>
 
-    <ul className="PostsList__list">
-      <li className="PostsList__item">
-        <div>
-          <b>[User #1]: </b>
-          sunt aut facere repellat provident occaecati excepturi optio
-        </div>
-        <button
-          type="button"
-          className="PostsList__button button"
-        >
-          Close
-        </button>
-      </li>
-
-      <li className="PostsList__item">
-        <div>
-          <b>[User #2]: </b>
-          et ea vero quia laudantium autem
-        </div>
-
-        <button
-          type="button"
-          className="PostsList__button button"
-        >
-          Open
-        </button>
-      </li>
+    <ul className="list-group">
+      {posts.map(post => (
+        <li key={post.id} className="list-group-item post">
+          <Post post={post} getPosts={getPosts} />
+        </li>
+      ))}
     </ul>
   </div>
 );
+
+PostsList.propTypes = {
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
+  getPosts: PropTypes.func.isRequired,
+};
